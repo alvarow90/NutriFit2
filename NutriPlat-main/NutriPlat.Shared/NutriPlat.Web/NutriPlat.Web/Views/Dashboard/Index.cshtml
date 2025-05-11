@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2>Bienvenido, @ViewBag.FullName</h2>
+
+<p class="lead">Rol: <strong>@ViewBag.Role</strong></p>
+
+<div class="mt-4">
+    <p>Has iniciado sesión exitosamente en el sistema NutriPlat 🎉</p>
+    <a href="/Auth/Logout" class="btn btn-danger">Cerrar sesión</a>
+</div>

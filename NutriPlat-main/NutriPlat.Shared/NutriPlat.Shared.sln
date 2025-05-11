@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriPlat.WebApp", "NutriPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriPlat.Mobile", "NutriPlat.Mobile\NutriPlat.Mobile\NutriPlat.Mobile.csproj", "{FE79EFE8-C191-4821-8992-2A443024F2AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriPlat.Web", "NutriPlat.Web\NutriPlat.Web\NutriPlat.Web.csproj", "{BDDCFC11-A47E-4067-ADCA-B3FCD3446338}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{FE79EFE8-C191-4821-8992-2A443024F2AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE79EFE8-C191-4821-8992-2A443024F2AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE79EFE8-C191-4821-8992-2A443024F2AE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BDDCFC11-A47E-4067-ADCA-B3FCD3446338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDDCFC11-A47E-4067-ADCA-B3FCD3446338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDDCFC11-A47E-4067-ADCA-B3FCD3446338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDDCFC11-A47E-4067-ADCA-B3FCD3446338}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
