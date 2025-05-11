@@ -7,7 +7,7 @@
             InitializeComponent();
 
             MainPage = new AppShell();
-            Shell.Current.GoToAsync("//Login");
+            Shell.Current.GoToAsync("//Dashboard");
 
         }
     }

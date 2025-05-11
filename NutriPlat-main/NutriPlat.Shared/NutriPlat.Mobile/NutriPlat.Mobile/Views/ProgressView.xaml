@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:NutriPlat.Mobile.ViewModels"
+    x:Class="NutriPlat.Mobile.Views.ProgressView"
+    x:DataType="vm:ProgressViewModel"
+    Title="Mi Progreso">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Registrar progreso" FontSize="20" FontAttributes="Bold" />
+
+            <DatePicker Date="{Binding EntryDate}" />
+
+            <Entry Placeholder="Peso (kg)" Keyboard="Numeric" Text="{Binding WeightKg}" />
+            <Entry Placeholder="% Grasa corporal" Keyboard="Numeric" Text="{Binding BodyFatPercentage}" />
+            <Editor Placeholder="Notas..." AutoSize="TextChanges" Text="{Binding Notes}" />
+
+            <Button Text="Guardar entrada" Command="{Binding SaveEntryCommand}" />
+
+            <Label Text="{Binding Message}" TextColor="Green" />
+
+            <BoxView HeightRequest="2" Color="Gray" />
+
+            <Label Text="Historial" FontSize="20" FontAttributes="Bold" />
+
+            <CollectionView ItemsSource="{Binding ProgressEntries}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,5">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding EntryDate, StringFormat='{0:dd MMM yyyy}'}" FontAttributes="Bold" />
+                                <Label Text="{Binding WeightKg, StringFormat='Peso: {0} kg'}" />
+                                <Label Text="{Binding BodyFatPercentage, StringFormat='Grasa: {0}%'}" />
+                                <Label Text="{Binding Notes}" FontAttributes="Italic" FontSize="12" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

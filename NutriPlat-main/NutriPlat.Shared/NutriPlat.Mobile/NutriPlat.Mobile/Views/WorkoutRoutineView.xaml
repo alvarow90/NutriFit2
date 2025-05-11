@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:NutriPlat.Mobile.ViewModels"
+    x:Class="NutriPlat.Mobile.Views.WorkoutRoutineView"
+    x:DataType="vm:WorkoutRoutineViewModel"
+    Title="Mi Rutina">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+
+            <Label Text="{Binding Message}" TextColor="Red" IsVisible="{Binding Message.Length, Converter={StaticResource ZeroToFalseConverter}}" />
+
+            <Label Text="Nombre de la rutina:" FontAttributes="Bold" />
+            <Label Text="{Binding Routine.WorkoutRoutineName}" />
+
+            <Label Text="Descripción:" FontAttributes="Bold" />
+            <Label Text="{Binding Routine.WorkoutRoutineDescription}" />
+
+            <Label Text="Asignada por:" FontAttributes="Bold" />
+            <Label Text="{Binding Routine.AssignedByTrainerId}" />
+
+            <Label Text="Fecha de asignación:" FontAttributes="Bold" />
+            <Label Text="{Binding Routine.AssignedDate, StringFormat='{0:dd MMM yyyy}'}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

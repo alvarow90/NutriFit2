@@ -8,7 +8,21 @@
     Shell.FlyoutBehavior="Disabled"
     Title="NutriPlat.Mobile">
 
-    <ShellContent Title="Login" Route="Login" ContentTemplate="{DataTemplate views:LoginView}" />
-    <ShellContent Title="Dashboard" Route="Dashboard" ContentTemplate="{DataTemplate views:DashboardView}" />
+
+    <TabBar>
+
+        <ShellContent Title="Inicio" Route="Dashboard" ContentTemplate="{DataTemplate views:DashboardView}" />
+
+        <ShellContent Title="Progreso" Route="Progress" ContentTemplate="{DataTemplate views:ProgressView}" />
+
+        <ShellContent Title="Rutina" Route="WorkoutRoutine" ContentTemplate="{DataTemplate views:WorkoutRoutineView}" />
+
+        <ShellContent Title="Nutrición" Route="NutritionPlan" ContentTemplate="{DataTemplate views:NutritionPlanView}" />
+
+        <ShellContent Route="Login"
+                  ContentTemplate="{DataTemplate views:LoginView}" />
+
+    </TabBar>
+
 
 </Shell>

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Storage;
 
 namespace NutriPlat.Mobile.ViewModels
@@ -21,5 +22,41 @@ namespace NutriPlat.Mobile.ViewModels
             FullName = await SecureStorage.Default.GetAsync("user_name") ?? "Usuario";
             Role = await SecureStorage.Default.GetAsync("user_role") ?? "Desconocido";
         }
+
+        [RelayCommand]
+        private async Task IrAProgreso()
+        {
+            await Shell.Current.GoToAsync("//Progress");
+        }
+
+        [RelayCommand]
+        private async Task IrARutina()
+        {
+            await Shell.Current.GoToAsync("//WorkoutRoutine");
+        }
+
+        [RelayCommand]
+        private async Task IrANutricion()
+        {
+            await Shell.Current.GoToAsync("//NutritionPlan");
+        }
+
+
+        [RelayCommand]
+        private async Task CerrarSesionAsync()
+        {
+            try
+            {
+                SecureStorage.Default.RemoveAll();
+                await Shell.Current.GoToAsync("//Login");
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Error al cerrar sesión: {ex.Message}", "OK");
+            }
+        }
+
+
+
     }
 }

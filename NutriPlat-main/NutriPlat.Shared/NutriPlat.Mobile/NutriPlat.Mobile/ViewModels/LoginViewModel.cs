@@ -51,8 +51,9 @@ namespace NutriPlat.Mobile.ViewModels
                 await SecureStorage.Default.SetAsync("user_role", tokenResponse.Role);
                 await SecureStorage.Default.SetAsync("user_name", tokenResponse.FullName);
 
-                // Navegar a la pantalla principal (ajusta según tu AppShell)
-                await Shell.Current.GoToAsync("//Dashboard");
+                await Shell.Current.GoToAsync("//Dashboard", true);
+                await Shell.Current.DisplayAlert("Bienvenido", $"Hola {tokenResponse.FullName} 👋", "Continuar");
+
             }
             else
             {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:NutriPlat.Mobile.ViewModels"
+    x:Class="NutriPlat.Mobile.Views.NutritionPlanView"
+    x:DataType="vm:NutritionPlanViewModel"
+    Title="Mi Plan de Nutrición">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+
+            <Label Text="{Binding Message}" TextColor="Red" IsVisible="{Binding Message.Length, Converter={StaticResource ZeroToFalseConverter}}" />
+
+            <Label Text="Nombre del plan:" FontAttributes="Bold" />
+            <Label Text="{Binding Plan.NutritionPlanName}" />
+
+            <Label Text="Descripción:" FontAttributes="Bold" />
+            <Label Text="{Binding Plan.NutritionPlanDescription}" />
+
+            <Label Text="Asignado por:" FontAttributes="Bold" />
+            <Label Text="{Binding Plan.AssignedByNutritionistId}" />
+
+            <Label Text="Fecha de asignación:" FontAttributes="Bold" />
+            <Label Text="{Binding Plan.AssignedDate, StringFormat='{0:dd MMM yyyy}'}" />
+
+
+
+            <Label Text="Tu nutriólogo:" FontAttributes="Bold" />
+            <Label Text="{Binding Nutritionist.FirstName}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

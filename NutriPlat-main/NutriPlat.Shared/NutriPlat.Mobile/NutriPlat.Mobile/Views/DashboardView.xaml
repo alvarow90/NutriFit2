@@ -12,5 +12,14 @@
         <Label Text="{Binding FullName}" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" />
         <Label Text="Tu rol es:" FontSize="18" HorizontalOptions="Center" />
         <Label Text="{Binding Role}" FontSize="16" TextColor="Gray" HorizontalOptions="Center" />
+
+
+        <Button Text="Ver mi rutina" Command="{Binding IrARutinaCommand}" />
+        <Button Text="Ver mi progreso" Command="{Binding IrAProgresoCommand}" />
+        <Button Text="Ver plan de nutrición" Command="{Binding IrANutricionCommand}" />
+        <Button Text="Cerrar sesión" Command="{Binding CerrarSesionCommand}" />
+
+
     </VerticalStackLayout>
+
 </ContentPage>
