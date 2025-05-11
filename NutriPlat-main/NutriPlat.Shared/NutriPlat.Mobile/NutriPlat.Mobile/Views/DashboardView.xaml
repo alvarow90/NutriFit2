@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:NutriPlat.Mobile.ViewModels"
+    x:Class="NutriPlat.Mobile.Views.DashboardView"
+    x:DataType="vm:DashboardViewModel"
+    Title="Bienvenido">
+
+    <VerticalStackLayout Padding="30" Spacing="15">
+        <Label Text="¡Hola!" FontSize="32" HorizontalOptions="Center" />
+        <Label Text="{Binding FullName}" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" />
+        <Label Text="Tu rol es:" FontSize="18" HorizontalOptions="Center" />
+        <Label Text="{Binding Role}" FontSize="16" TextColor="Gray" HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
