@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NutriPlat.Shared.Dtos.Auth;
+using NutriPlat.Shared.Enums;
 using NutriPlat.Web.Models;
-using NutriPlat.Web.Services;
+using NutriPlat.Web.Services.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace NutriPlat.Web.Controllers
 {
@@ -17,46 +23,96 @@ namespace NutriPlat.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            return View(new LoginViewModel());
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            Console.WriteLine("🔄 Controller recibiendo solicitud de login...");
-
             if (!ModelState.IsValid)
-            {
-                Console.WriteLine("⚠️ Modelo de login inválido.");
                 return View(model);
-            }
 
-            var loginDto = new LoginRequestDto
+            var tokenResult = await _authService.LoginAsync(new LoginRequestDto
             {
                 Email = model.Email,
                 Password = model.Password
-            };
+            });
 
-            var tokenResponse = await _authService.LoginAsync(loginDto);
-
-            if (tokenResponse != null)
+            if (tokenResult == null)
             {
-                Console.WriteLine("🔑 Token recibido exitosamente en el controller.");
-                HttpContext.Session.SetString("AuthToken", tokenResponse.AccessToken);
-                return RedirectToAction("Index", "Dashboard");
+                model.ErrorMessage = "Credenciales incorrectas.";
+                return View(model);
             }
 
-            Console.WriteLine("❌ Falló la autenticación en el controller.");
-            ModelState.AddModelError(string.Empty, "Credenciales incorrectas.");
-            return View(model);
+            // Decodificar el token para extraer los claims (incluyendo rol)
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(tokenResult.AccessToken);
+
+            var claims = jwtToken.Claims.ToList();
+
+            // Crear identidad y principal
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            // Guardar el token en la sesión (opcional)
+            HttpContext.Session.SetString("AuthToken", tokenResult.AccessToken);
+
+            // Autenticación vía cookie
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = tokenResult.ExpiresAt
+                });
+
+            return RedirectToAction("Index", "Dashboard");
         }
 
         [HttpGet]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Auth");
         }
+
+
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Register()
+        {
+            return View(new RegisterViewModel());
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var result = await _authService.RegisterAsync(new RegisterRequestDto
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Password = model.Password,
+                Role = Enum.Parse<UserRole>(model.Role)
+
+            });
+
+            if (result)
+            {
+                model = new RegisterViewModel { SuccessMessage = "✅ Usuario registrado exitosamente." };
+                return View(model);
+            }
+
+            model.ErrorMessage = "❌ Ocurrió un error al registrar el usuario.";
+            return View(model);
+        }
+
     }
 }

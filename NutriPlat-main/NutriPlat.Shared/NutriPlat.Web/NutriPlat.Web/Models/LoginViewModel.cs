@@ -10,5 +10,8 @@ namespace NutriPlat.Web.Models
 
         [Required(ErrorMessage = "Contraseña es obligatoria")]
         public string Password { get; set; } = string.Empty;
+
+        public string? ErrorMessage { get; set; }
+
     }
 }

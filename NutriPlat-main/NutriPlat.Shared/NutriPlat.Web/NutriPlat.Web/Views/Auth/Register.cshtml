@@ -1,0 +1,63 @@
+﻿@model NutriPlat.Web.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Registrar usuario";
+}
+
+<div class="container mt-5">
+    <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+        <h3 class="text-center mb-4">🧾 Registro de nuevo usuario</h3>
+
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            <div class="alert alert-success">@Model.SuccessMessage</div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger">@Model.ErrorMessage</div>
+        }
+
+        <form asp-action="Register" method="post">
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="FirstName" class="form-label">Nombre</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger" />
+                </div>
+                <div class="col">
+                    <label asp-for="LastName" class="form-label">Apellido</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Correo</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Contraseña</label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Role" class="form-label">Rol</label>
+                <select asp-for="Role" class="form-select">
+                    <option value="Usuario">Usuario</option>
+                    <option value="Trainer">Entrenador</option>
+                    <option value="Nutritionist">Nutriólogo</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger" />
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Registrar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

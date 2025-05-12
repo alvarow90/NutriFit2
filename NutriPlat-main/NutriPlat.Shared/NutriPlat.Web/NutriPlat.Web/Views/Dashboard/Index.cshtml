@@ -2,11 +2,25 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h2>Bienvenido, @ViewBag.FullName</h2>
+@using NutriPlat.Web.Helpers
 
-<p class="lead">Rol: <strong>@ViewBag.Role</strong></p>
+
+<h2>Bienvenido, @(User.Identity?.Name ?? "Invitado")</h2>
+
+<p class="lead">
+    Rol: <strong>@RoleTranslator.ToSpanish(User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value)</strong>
+</p>
+
 
 <div class="mt-4">
     <p>Has iniciado sesión exitosamente en el sistema NutriPlat 🎉</p>
-    <a href="/Auth/Logout" class="btn btn-danger">Cerrar sesión</a>
+    <a href="/Auth/Logout">Cerrar sesión</a>
 </div>
+
+
+<ul>
+    @foreach (var claim in User.Claims)
+    {
+        <li>@claim.Type: @claim.Value</li>
+    }
+</ul>

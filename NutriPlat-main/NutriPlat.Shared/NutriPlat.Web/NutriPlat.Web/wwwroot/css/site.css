@@ -1,22 +1,57 @@
+/* Tamaño base de fuente */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Enfoques accesibles y estilos de interacción */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Asegurar altura completa y reset de márgenes */
+html, body, main {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
+/* Estilo base del body (para otras páginas) */
 body {
-  margin-bottom: 60px;
+    margin-bottom: 9000px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+}
+
+    /* ===== Estilo especial para la página de login ===== */
+    body.login-page {
+        background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    }
+
+        body.login-page main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+/* Estilo para tarjetas (como la del login) */
+.card {
+    border-radius: 1rem;
+    border: none;
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40000vh;
 }
